@@ -76,10 +76,25 @@ export default function Header() {
                                         } else {
                                             // 检查是否有其他代码阻止了导航
                                             console.log('🔍 检查导航状态...')
-                                            
+
                                             // 强制导航 - 立即尝试手动导航
                                             console.log('🚀 强制导航到:', item.href)
-                                            router.push(item.href)
+                                            
+                                            // 立即尝试多种导航方法
+                                            try {
+                                                router.push(item.href)
+                                                console.log('📱 router.push 已调用')
+                                            } catch (error) {
+                                                console.log('❌ router.push 失败:', error)
+                                            }
+                                            
+                                            // 同时尝试 window.location
+                                            try {
+                                                window.location.href = item.href
+                                                console.log('🌐 window.location.href 已调用')
+                                            } catch (error) {
+                                                console.log('❌ window.location.href 失败:', error)
+                                            }
                                             
                                             // 添加延迟确保导航完成
                                             setTimeout(() => {
@@ -90,12 +105,12 @@ export default function Header() {
                                                 })
                                                 
                                                 if (pathname === item.href) {
-                                                    console.log('⚠️ 导航仍然失败，尝试window.location')
-                                                    window.location.href = item.href
+                                                    console.log('⚠️ 导航仍然失败，尝试强制刷新')
+                                                    window.location.reload()
                                                 } else {
                                                     console.log('✅ 导航成功完成')
                                                 }
-                                            }, 100)
+                                            }, 50)
                                         }
                                     }}
                                     className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${isActive
@@ -169,7 +184,22 @@ export default function Header() {
                                             } else {
                                                 // 强制导航 - 立即尝试手动导航
                                                 console.log('📱 强制移动端导航到:', item.href)
-                                                router.push(item.href)
+                                                
+                                                // 立即尝试多种导航方法
+                                                try {
+                                                    router.push(item.href)
+                                                    console.log('📱 移动端 router.push 已调用')
+                                                } catch (error) {
+                                                    console.log('❌ 移动端 router.push 失败:', error)
+                                                }
+                                                
+                                                // 同时尝试 window.location
+                                                try {
+                                                    window.location.href = item.href
+                                                    console.log('🌐 移动端 window.location.href 已调用')
+                                                } catch (error) {
+                                                    console.log('❌ 移动端 window.location.href 失败:', error)
+                                                }
                                                 
                                                 // 添加延迟确保导航完成
                                                 setTimeout(() => {
@@ -180,12 +210,12 @@ export default function Header() {
                                                     })
                                                     
                                                     if (pathname === item.href) {
-                                                        console.log('📱 移动端导航仍然失败，尝试window.location')
-                                                        window.location.href = item.href
+                                                        console.log('📱 移动端导航仍然失败，尝试强制刷新')
+                                                        window.location.reload()
                                                     } else {
                                                         console.log('📱 移动端导航成功完成')
                                                     }
-                                                }, 100)
+                                                }, 50)
                                             }
 
                                             setIsMenuOpen(false)

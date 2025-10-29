@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Code, Smartphone, Monitor, Database, Cloud, Shield, Zap, Target } from 'lucide-react'
+import { Code, Smartphone, Monitor, Database, Cloud, Shield, Zap, Target, Wifi } from 'lucide-react'
 
 const services = [
     {
@@ -101,6 +101,22 @@ const services = [
         technologies: ['OWASP', 'SAST', 'DAST', 'Penetration Testing', 'SSL/TLS', 'OAuth'],
         color: 'text-red-600',
         bgColor: 'bg-red-50'
+    },
+    {
+        icon: Wifi,
+        title: '物联网解决方案',
+        description: '智能设备连接、数据采集和远程监控的完整物联网解决方案',
+        features: [
+            '智能设备连接',
+            '传感器数据采集',
+            '远程监控与控制',
+            '实时数据处理',
+            '设备管理平台',
+            '数据分析与预测'
+        ],
+        technologies: ['Arduino', 'ESP32', 'MQTT', 'LoRaWAN', 'React', 'Node.js'],
+        color: 'text-indigo-600',
+        bgColor: 'bg-indigo-50'
     }
 ]
 

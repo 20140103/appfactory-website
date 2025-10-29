@@ -1,0 +1,6 @@
+# Next.js rewrites
+/api/* /api/:splat 200
+/_next/static/* /_next/static/:splat 200
+
+# Fallback for client-side routing
+/* /index.html 200

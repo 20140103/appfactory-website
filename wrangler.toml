@@ -1,0 +1,11 @@
+name = "appfactory-website"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "appfactory-website"
+
+# Cloudflare Pages 配置
+[[pages_builds]]
+command = "yarn build"
+cwd = "."
+watch_dir = "."

@@ -111,6 +111,21 @@ const allProducts = [
         completedDate: '2024-02-10',
         teamSize: 4,
         duration: '3个月'
+    },
+    {
+        id: 8,
+        title: '卫星通讯管理系统',
+        description: '基于卫星通讯技术的远程监控管理系统，支持全球范围内的设备连接和数据传输，适用于海洋、航空、极地等特殊环境。',
+        image: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=600&h=400&fit=crop',
+        category: '卫星通讯',
+        technologies: ['C++', 'Python', 'Satellite API', 'WebSocket', 'React', 'MongoDB'],
+        features: ['全球覆盖', '实时通讯', '数据中继', '位置追踪'],
+        demoUrl: '#',
+        githubUrl: '#',
+        status: '已完成',
+        completedDate: '2024-03-15',
+        teamSize: 6,
+        duration: '5个月'
     }
 ]
 

@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, Code2 } from 'lucide-react'
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const pathname = usePathname()
+    const router = useRouter()
 
     // 添加路径变化日志
     useEffect(() => {
@@ -40,7 +41,7 @@ export default function Header() {
                             // 简化的路径匹配逻辑
                             const isActive = pathname === item.href ||
                                 (item.href !== '/' && pathname.startsWith(item.href))
-                            
+
                             // 添加路径匹配日志
                             console.log(`🔗 导航项: ${item.name}`, {
                                 href: item.href,
@@ -49,18 +50,49 @@ export default function Header() {
                                 exactMatch: pathname === item.href,
                                 startsWith: item.href !== '/' && pathname.startsWith(item.href)
                             })
-                            
+
                             return (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    onClick={() => {
+                                    onClick={(e) => {
                                         console.log('🖱️ 导航点击:', {
                                             item: item.name,
                                             href: item.href,
                                             currentPath: pathname,
-                                            timestamp: new Date().toISOString()
+                                            timestamp: new Date().toISOString(),
+                                            event: e,
+                                            defaultPrevented: e.defaultPrevented,
+                                            isPropagationStopped: e.isPropagationStopped()
                                         })
+                                        
+                                        // 确保导航正常工作
+                                        console.log('🖱️ 导航目标:', item.href)
+                                        
+                                        // 如果当前路径和目标路径相同，强制刷新
+                                        if (pathname === item.href) {
+                                            console.log('🔄 强制刷新页面')
+                                            window.location.reload()
+                                        } else {
+                                            // 检查是否有其他代码阻止了导航
+                                            console.log('🔍 检查导航状态...')
+                                            
+                                            // 添加延迟确保导航完成
+                                            setTimeout(() => {
+                                                console.log('⏰ 延迟检查导航状态:', {
+                                                    currentPath: pathname,
+                                                    targetPath: item.href,
+                                                    pathChanged: pathname !== item.href
+                                                })
+                                                
+                                                if (pathname === item.href) {
+                                                    console.log('⚠️ 导航可能失败，尝试手动导航')
+                                                    router.push(item.href)
+                                                } else {
+                                                    console.log('✅ 导航成功完成')
+                                                }
+                                            }, 100)
+                                        }
                                     }}
                                     className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${isActive
                                         ? 'text-primary-600'
@@ -102,7 +134,7 @@ export default function Header() {
                                 // 简化的路径匹配逻辑
                                 const isActive = pathname === item.href ||
                                     (item.href !== '/' && pathname.startsWith(item.href))
-                                
+
                                 // 添加移动端路径匹配日志
                                 console.log(`📱 移动端导航项: ${item.name}`, {
                                     href: item.href,
@@ -111,18 +143,35 @@ export default function Header() {
                                     exactMatch: pathname === item.href,
                                     startsWith: item.href !== '/' && pathname.startsWith(item.href)
                                 })
-                                
+
                                 return (
                                     <Link
                                         key={item.name}
                                         href={item.href}
-                                        onClick={() => {
+                                        onClick={(e) => {
                                             console.log('📱 移动端导航点击:', {
                                                 item: item.name,
                                                 href: item.href,
                                                 currentPath: pathname,
                                                 timestamp: new Date().toISOString()
                                             })
+                                            // 确保导航正常工作
+                                            console.log('📱 移动端导航目标:', item.href)
+
+                                            // 如果当前路径和目标路径相同，强制刷新
+                                            if (pathname === item.href) {
+                                                console.log('🔄 移动端强制刷新页面')
+                                                window.location.reload()
+                                            } else {
+                                                // 添加延迟确保导航完成
+                                                setTimeout(() => {
+                                                    if (pathname === item.href) {
+                                                        console.log('⚠️ 移动端导航可能失败，尝试手动导航')
+                                                        router.push(item.href)
+                                                    }
+                                                }, 100)
+                                            }
+
                                             setIsMenuOpen(false)
                                         }}
                                         className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${isActive

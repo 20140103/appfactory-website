@@ -42,6 +42,18 @@ const products = [
         demoUrl: '#',
         githubUrl: '#',
         status: '已完成'
+    },
+    {
+        id: 4,
+        title: '智能农业监控系统',
+        description: '基于物联网技术的智能农业监控系统，实时监测土壤湿度、温度、光照等环境参数，支持远程控制和自动化管理。',
+        image: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop',
+        category: '物联网',
+        technologies: ['Arduino', 'ESP32', 'MQTT', 'React', 'Node.js'],
+        features: ['环境监测', '远程控制', '数据记录', '智能报警'],
+        demoUrl: '#',
+        githubUrl: '#',
+        status: '已完成'
     }
 ]
 

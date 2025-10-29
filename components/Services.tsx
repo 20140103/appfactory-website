@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { Code, Smartphone, Monitor, Database, Cloud, Shield } from 'lucide-react'
+import { Code, Smartphone, Monitor, Database, Cloud, Shield, Wifi } from 'lucide-react'
 
 const services = [
     {
@@ -47,6 +47,13 @@ const services = [
         description: '全面的安全测试和代码审计服务',
         features: ['代码审计', '安全测试', '漏洞修复', '安全培训'],
         color: 'text-red-600'
+    },
+    {
+        icon: Wifi,
+        title: '物联网解决方案',
+        description: '智能设备连接、数据采集和远程监控的完整物联网解决方案',
+        features: ['设备连接', '数据采集', '远程监控', '智能控制'],
+        color: 'text-indigo-600'
     }
 ]
 

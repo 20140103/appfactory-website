@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
-const categories = ['全部', 'Web应用', '移动应用', '桌面应用', '数据分析']
-const technologies = ['React', 'Vue.js', 'Node.js', 'React Native', 'Python', 'TypeScript']
+const categories = ['全部', 'Web应用', '移动应用', '桌面应用', '数据分析', '物联网']
+const technologies = ['React', 'Vue.js', 'Node.js', 'React Native', 'Python', 'TypeScript', 'Arduino', 'ESP32', 'MQTT']
 
 export default function ProductsFilter() {
     const [selectedCategory, setSelectedCategory] = useState('全部')

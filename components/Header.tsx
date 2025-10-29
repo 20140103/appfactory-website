@@ -30,10 +30,9 @@ export default function Header() {
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex space-x-8">
                         {navigation.map((item) => {
-                            // 处理trailingSlash的路径匹配逻辑
-                            const isActive = pathname === item.href ||
-                                (item.href === '/' && pathname === '/') ||
-                                (item.href !== '/' && (pathname.startsWith(item.href) || pathname.startsWith(item.href.slice(0, -1))))
+                            // 简化的路径匹配逻辑
+                            const isActive = pathname === item.href || 
+                                           (item.href !== '/' && pathname.startsWith(item.href))
                             return (
                                 <Link
                                     key={item.name}
@@ -75,10 +74,9 @@ export default function Header() {
                     <div className="md:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
                             {navigation.map((item) => {
-                                // 处理trailingSlash的路径匹配逻辑
-                                const isActive = pathname === item.href ||
-                                    (item.href === '/' && pathname === '/') ||
-                                    (item.href !== '/' && (pathname.startsWith(item.href) || pathname.startsWith(item.href.slice(0, -1))))
+                                // 简化的路径匹配逻辑
+                                const isActive = pathname === item.href || 
+                                               (item.href !== '/' && pathname.startsWith(item.href))
                                 return (
                                     <Link
                                         key={item.name}

@@ -4,9 +4,10 @@ const nextConfig = {
         domains: ['images.unsplash.com', 'via.placeholder.com'],
     },
     // 为Cloudflare Pages优化
-    trailingSlash: true,
     output: 'export',
     distDir: 'out',
+    // 禁用trailingSlash以避免路由问题
+    trailingSlash: false,
 }
 
 module.exports = nextConfig

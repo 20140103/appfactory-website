@@ -65,10 +65,10 @@ export default function Header() {
                                             defaultPrevented: e.defaultPrevented,
                                             isPropagationStopped: e.isPropagationStopped()
                                         })
-                                        
+
                                         // 确保导航正常工作
                                         console.log('🖱️ 导航目标:', item.href)
-                                        
+
                                         // 如果当前路径和目标路径相同，强制刷新
                                         if (pathname === item.href) {
                                             console.log('🔄 强制刷新页面')
@@ -76,6 +76,10 @@ export default function Header() {
                                         } else {
                                             // 检查是否有其他代码阻止了导航
                                             console.log('🔍 检查导航状态...')
+                                            
+                                            // 强制导航 - 立即尝试手动导航
+                                            console.log('🚀 强制导航到:', item.href)
+                                            router.push(item.href)
                                             
                                             // 添加延迟确保导航完成
                                             setTimeout(() => {
@@ -86,8 +90,8 @@ export default function Header() {
                                                 })
                                                 
                                                 if (pathname === item.href) {
-                                                    console.log('⚠️ 导航可能失败，尝试手动导航')
-                                                    router.push(item.href)
+                                                    console.log('⚠️ 导航仍然失败，尝试window.location')
+                                                    window.location.href = item.href
                                                 } else {
                                                     console.log('✅ 导航成功完成')
                                                 }
@@ -163,11 +167,23 @@ export default function Header() {
                                                 console.log('🔄 移动端强制刷新页面')
                                                 window.location.reload()
                                             } else {
+                                                // 强制导航 - 立即尝试手动导航
+                                                console.log('📱 强制移动端导航到:', item.href)
+                                                router.push(item.href)
+                                                
                                                 // 添加延迟确保导航完成
                                                 setTimeout(() => {
+                                                    console.log('📱 延迟检查移动端导航状态:', {
+                                                        currentPath: pathname,
+                                                        targetPath: item.href,
+                                                        pathChanged: pathname !== item.href
+                                                    })
+                                                    
                                                     if (pathname === item.href) {
-                                                        console.log('⚠️ 移动端导航可能失败，尝试手动导航')
-                                                        router.push(item.href)
+                                                        console.log('📱 移动端导航仍然失败，尝试window.location')
+                                                        window.location.href = item.href
+                                                    } else {
+                                                        console.log('📱 移动端导航成功完成')
                                                     }
                                                 }, 100)
                                             }

@@ -1,12 +1,19 @@
+'use client'
+
+import { useState } from 'react'
 import ProductsGrid from '@/components/ProductsGrid'
 import ProductsFilter from '@/components/ProductsFilter'
 
-export const metadata = {
-    title: '产品展示 - AppFactory',
-    description: '查看我们完成的所有软件项目，包括Web应用、移动应用、桌面应用等。',
-}
-
 export default function ProductsPage() {
+    const [filters, setFilters] = useState({
+        category: '全部',
+        technologies: [] as string[]
+    })
+
+    const handleFilterChange = (newFilters: { category: string; technologies: string[] }) => {
+        setFilters(newFilters)
+    }
+
     return (
         <div className="min-h-screen bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -19,8 +26,8 @@ export default function ProductsPage() {
                     </p>
                 </div>
 
-                <ProductsFilter />
-                <ProductsGrid />
+                <ProductsFilter onFilterChange={handleFilterChange} />
+                <ProductsGrid filters={filters} />
             </div>
         </div>
     )

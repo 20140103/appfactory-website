@@ -1,12 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const categories = ['全部', 'Web应用', '移动应用', '桌面应用', '数据分析', '物联网', '卫星通讯']
 const technologies = ['React', 'Vue.js', 'Node.js', 'React Native', 'Python', 'TypeScript', 'Arduino', 'ESP32', 'MQTT', 'C++', 'Satellite API', 'WebSocket']
 
-export default function ProductsFilter() {
+interface ProductsFilterProps {
+    onFilterChange: (filters: { category: string; technologies: string[] }) => void
+}
+
+export default function ProductsFilter({ onFilterChange }: ProductsFilterProps) {
     const [selectedCategory, setSelectedCategory] = useState('全部')
     const [selectedTech, setSelectedTech] = useState<string[]>([])
 
@@ -17,6 +21,14 @@ export default function ProductsFilter() {
                 : [...prev, tech]
         )
     }
+
+    // 当筛选条件改变时，通知父组件
+    useEffect(() => {
+        onFilterChange({
+            category: selectedCategory,
+            technologies: selectedTech
+        })
+    }, [selectedCategory, selectedTech, onFilterChange])
 
     return (
         <div className="mb-12">
@@ -32,8 +44,8 @@ export default function ProductsFilter() {
                                 key={category}
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${selectedCategory === category
-                                        ? 'bg-primary-600 text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    ? 'bg-primary-600 text-white'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 {category}
@@ -51,8 +63,8 @@ export default function ProductsFilter() {
                                 key={tech}
                                 onClick={() => handleTechToggle(tech)}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${selectedTech.includes(tech)
-                                        ? 'bg-primary-600 text-white'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    ? 'bg-primary-600 text-white'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 {tech}

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useMemo } from 'react'
 import Link from 'next/link'
 import { ExternalLink, Github, Calendar, Users } from 'lucide-react'
 
@@ -129,13 +129,69 @@ const allProducts = [
     }
 ]
 
-export default function ProductsGrid() {
+interface ProductsGridProps {
+    filters: {
+        category: string
+        technologies: string[]
+    }
+}
+
+export default function ProductsGrid({ filters }: ProductsGridProps) {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true })
 
+    // 筛选产品
+    const filteredProducts = useMemo(() => {
+        return allProducts.filter(product => {
+            // 按类别筛选
+            const categoryMatch = filters.category === '全部' || product.category === filters.category
+            
+            // 按技术栈筛选
+            const techMatch = filters.technologies.length === 0 || 
+                filters.technologies.some(tech => product.technologies.includes(tech))
+            
+            return categoryMatch && techMatch
+        })
+    }, [filters])
+
     return (
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {allProducts.map((product, index) => (
+        <div>
+            {/* 筛选结果统计 */}
+            <div className="mb-6 text-center">
+                <p className="text-gray-600">
+                    找到 <span className="font-semibold text-primary-600">{filteredProducts.length}</span> 个项目
+                    {filters.category !== '全部' && (
+                        <span className="ml-2">
+                            (类别: <span className="font-medium">{filters.category}</span>)
+                        </span>
+                    )}
+                    {filters.technologies.length > 0 && (
+                        <span className="ml-2">
+                            (技术: <span className="font-medium">{filters.technologies.join(', ')}</span>)
+                        </span>
+                    )}
+                </p>
+            </div>
+
+            {filteredProducts.length === 0 ? (
+                <div className="text-center py-12">
+                    <div className="text-gray-400 mb-4">
+                        <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.709" />
+                        </svg>
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-900 mb-2">没有找到匹配的项目</h3>
+                    <p className="text-gray-600 mb-4">请尝试调整筛选条件或清除筛选</p>
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="btn-primary"
+                    >
+                        清除筛选
+                    </button>
+                </div>
+            ) : (
+                <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {filteredProducts.map((product, index) => (
                 <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 20 }}
@@ -230,7 +286,9 @@ export default function ProductsGrid() {
                         </div>
                     </div>
                 </motion.div>
-            ))}
+                    ))}
+                </div>
+            )}
         </div>
     )
 }

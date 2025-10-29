@@ -31,17 +31,17 @@ export default function Header() {
                     <nav className="hidden md:flex space-x-8">
                         {navigation.map((item) => {
                             // 处理静态导出时的路径匹配问题
-                            const isActive = pathname === item.href || 
-                                           pathname === item.href + '/' ||
-                                           (item.href === '/' && pathname === '/') ||
-                                           (item.href !== '/' && pathname.startsWith(item.href + '/'))
+                            const isActive = pathname === item.href ||
+                                pathname === item.href + '/' ||
+                                (item.href === '/' && pathname === '/') ||
+                                (item.href !== '/' && pathname.startsWith(item.href + '/'))
                             return (
                                 <Link
                                     key={item.name}
                                     href={item.href}
                                     className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${isActive
-                                            ? 'text-primary-600'
-                                            : 'text-gray-700 hover:text-primary-600'
+                                        ? 'text-primary-600'
+                                        : 'text-gray-700 hover:text-primary-600'
                                         }`}
                                 >
                                     {item.name}
@@ -77,17 +77,17 @@ export default function Header() {
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
                             {navigation.map((item) => {
                                 // 处理静态导出时的路径匹配问题
-                                const isActive = pathname === item.href || 
-                                               pathname === item.href + '/' ||
-                                               (item.href === '/' && pathname === '/') ||
-                                               (item.href !== '/' && pathname.startsWith(item.href + '/'))
+                                const isActive = pathname === item.href ||
+                                    pathname === item.href + '/' ||
+                                    (item.href === '/' && pathname === '/') ||
+                                    (item.href !== '/' && pathname.startsWith(item.href + '/'))
                                 return (
                                     <Link
                                         key={item.name}
                                         href={item.href}
                                         className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${isActive
-                                                ? 'text-primary-600 bg-primary-50'
-                                                : 'text-gray-700 hover:text-primary-600'
+                                            ? 'text-primary-600 bg-primary-50'
+                                            : 'text-gray-700 hover:text-primary-600'
                                             }`}
                                         onClick={() => setIsMenuOpen(false)}
                                     >

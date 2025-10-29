@@ -145,11 +145,11 @@ export default function ProductsGrid({ filters }: ProductsGridProps) {
         return allProducts.filter(product => {
             // 按类别筛选
             const categoryMatch = filters.category === '全部' || product.category === filters.category
-            
+
             // 按技术栈筛选
-            const techMatch = filters.technologies.length === 0 || 
+            const techMatch = filters.technologies.length === 0 ||
                 filters.technologies.some(tech => product.technologies.includes(tech))
-            
+
             return categoryMatch && techMatch
         })
     }, [filters])
@@ -192,100 +192,100 @@ export default function ProductsGrid({ filters }: ProductsGridProps) {
             ) : (
                 <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredProducts.map((product, index) => (
-                <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="card group hover:scale-105 transition-transform duration-300"
-                >
-                    <div className="relative overflow-hidden rounded-t-xl">
-                        <img
-                            src={product.image}
-                            alt={product.title}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                        <div className="absolute top-4 left-4">
-                            <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                                {product.category}
-                            </span>
-                        </div>
-                        <div className="absolute top-4 right-4">
-                            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                                {product.status}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div className="p-6">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                            {product.title}
-                        </h3>
-
-                        <p className="text-gray-600 mb-4 line-clamp-3">
-                            {product.description}
-                        </p>
-
-                        <div className="mb-4">
-                            <h4 className="text-sm font-medium text-gray-900 mb-2">技术栈</h4>
-                            <div className="flex flex-wrap gap-2">
-                                {product.technologies.map((tech) => (
-                                    <span
-                                        key={tech}
-                                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
-                                    >
-                                        {tech}
+                        <motion.div
+                            key={product.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            className="card group hover:scale-105 transition-transform duration-300"
+                        >
+                            <div className="relative overflow-hidden rounded-t-xl">
+                                <img
+                                    src={product.image}
+                                    alt={product.title}
+                                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                                />
+                                <div className="absolute top-4 left-4">
+                                    <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                        {product.category}
                                     </span>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="mb-4">
-                            <h4 className="text-sm font-medium text-gray-900 mb-2">核心功能</h4>
-                            <div className="flex flex-wrap gap-2">
-                                {product.features.map((feature) => (
-                                    <span
-                                        key={feature}
-                                        className="bg-primary-50 text-primary-700 px-2 py-1 rounded text-xs"
-                                    >
-                                        {feature}
+                                </div>
+                                <div className="absolute top-4 right-4">
+                                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                                        {product.status}
                                     </span>
-                                ))}
+                                </div>
                             </div>
-                        </div>
 
-                        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                            <div className="flex items-center">
-                                <Calendar className="h-4 w-4 mr-1" />
-                                {product.completedDate}
+                            <div className="p-6">
+                                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                                    {product.title}
+                                </h3>
+
+                                <p className="text-gray-600 mb-4 line-clamp-3">
+                                    {product.description}
+                                </p>
+
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-medium text-gray-900 mb-2">技术栈</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {product.technologies.map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-medium text-gray-900 mb-2">核心功能</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {product.features.map((feature) => (
+                                            <span
+                                                key={feature}
+                                                className="bg-primary-50 text-primary-700 px-2 py-1 rounded text-xs"
+                                            >
+                                                {feature}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                    <div className="flex items-center">
+                                        <Calendar className="h-4 w-4 mr-1" />
+                                        {product.completedDate}
+                                    </div>
+                                    <div className="flex items-center">
+                                        <Users className="h-4 w-4 mr-1" />
+                                        {product.teamSize}人团队
+                                    </div>
+                                </div>
+
+                                <div className="text-sm text-gray-500 mb-4">
+                                    开发周期: {product.duration}
+                                </div>
+
+                                <div className="flex space-x-3">
+                                    <Link
+                                        href={product.demoUrl}
+                                        className="flex-1 btn-primary text-center flex items-center justify-center"
+                                    >
+                                        <ExternalLink className="h-4 w-4 mr-2" />
+                                        查看演示
+                                    </Link>
+                                    <Link
+                                        href={product.githubUrl}
+                                        className="btn-secondary flex items-center justify-center px-4"
+                                    >
+                                        <Github className="h-4 w-4" />
+                                    </Link>
+                                </div>
                             </div>
-                            <div className="flex items-center">
-                                <Users className="h-4 w-4 mr-1" />
-                                {product.teamSize}人团队
-                            </div>
-                        </div>
-
-                        <div className="text-sm text-gray-500 mb-4">
-                            开发周期: {product.duration}
-                        </div>
-
-                        <div className="flex space-x-3">
-                            <Link
-                                href={product.demoUrl}
-                                className="flex-1 btn-primary text-center flex items-center justify-center"
-                            >
-                                <ExternalLink className="h-4 w-4 mr-2" />
-                                查看演示
-                            </Link>
-                            <Link
-                                href={product.githubUrl}
-                                className="btn-secondary flex items-center justify-center px-4"
-                            >
-                                <Github className="h-4 w-4" />
-                            </Link>
-                        </div>
-                    </div>
-                </motion.div>
+                        </motion.div>
                     ))}
                 </div>
             )}

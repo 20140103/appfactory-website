@@ -169,8 +169,8 @@ export default function PricingSection() {
 
                             <button
                                 className={`w-full py-3 px-6 rounded-lg font-medium transition-colors duration-200 ${plan.popular
-                                        ? 'bg-primary-600 text-white hover:bg-primary-700'
-                                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    ? 'bg-primary-600 text-white hover:bg-primary-700'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                     }`}
                             >
                                 {plan.buttonText}

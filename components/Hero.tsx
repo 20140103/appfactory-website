@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, Code, Smartphone, Monitor } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Hero() {
+    const { t } = useLanguage()
+    
     return (
         <section className="gradient-bg text-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
@@ -18,22 +21,22 @@ export default function Hero() {
                     >
                         <div className="space-y-4">
                             <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                                专业的
-                                <span className="block text-yellow-300">软件开发</span>
-                                工作室
+                                {t('hero.title')}
+                                <span className="block text-yellow-300">{t('hero.titleHighlight')}</span>
+                                {t('hero.titleSuffix')}
                             </h1>
                             <p className="text-xl text-blue-100 max-w-lg">
-                                我们专注于高质量软件产品开发，为客户提供Web应用、移动应用、桌面应用等全方位的开发服务。
+                                {t('hero.description')}
                             </p>
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Link href="/products" className="btn-primary bg-white text-primary-600 hover:bg-gray-100">
-                                查看我们的作品
+                                {t('hero.viewWorks')}
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Link>
                             <Link href="/contact" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
-                                开始合作
+                                {t('hero.startCooperation')}
                             </Link>
                         </div>
 
@@ -41,15 +44,15 @@ export default function Hero() {
                         <div className="grid grid-cols-3 gap-8 pt-8">
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-yellow-300">50+</div>
-                                <div className="text-blue-100">完成项目</div>
+                                <div className="text-blue-100">{t('hero.stats.projects')}</div>
                             </div>
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-yellow-300">30+</div>
-                                <div className="text-blue-100">满意客户</div>
+                                <div className="text-blue-100">{t('hero.stats.clients')}</div>
                             </div>
                             <div className="text-center">
                                 <div className="text-3xl font-bold text-yellow-300">5+</div>
-                                <div className="text-blue-100">年经验</div>
+                                <div className="text-blue-100">{t('hero.stats.experience')}</div>
                             </div>
                         </div>
                     </motion.div>
@@ -70,7 +73,7 @@ export default function Hero() {
                             >
                                 <div className="flex items-center space-x-2">
                                     <Code className="h-6 w-6 text-primary-600" />
-                                    <span className="text-sm font-medium text-gray-700">Web开发</span>
+                                    <span className="text-sm font-medium text-gray-700">{t('services.webDev.title')}</span>
                                 </div>
                             </motion.div>
 
@@ -81,7 +84,7 @@ export default function Hero() {
                             >
                                 <div className="flex items-center space-x-2">
                                     <Smartphone className="h-6 w-6 text-primary-600" />
-                                    <span className="text-sm font-medium text-gray-700">移动应用</span>
+                                    <span className="text-sm font-medium text-gray-700">{t('services.mobileDev.title')}</span>
                                 </div>
                             </motion.div>
 
@@ -92,7 +95,7 @@ export default function Hero() {
                             >
                                 <div className="flex items-center space-x-2">
                                     <Monitor className="h-6 w-6 text-primary-600" />
-                                    <span className="text-sm font-medium text-gray-700">桌面应用</span>
+                                    <span className="text-sm font-medium text-gray-700">{t('services.desktopDev.title')}</span>
                                 </div>
                             </motion.div>
 

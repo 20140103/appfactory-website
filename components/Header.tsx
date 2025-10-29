@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X, Code2 } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const pathname = usePathname()
     const router = useRouter()
+    const { t } = useLanguage()
 
     // 添加路径变化日志
     useEffect(() => {
@@ -18,11 +21,11 @@ export default function Header() {
     }, [pathname])
 
     const navigation = [
-        { name: '首页', href: '/' },
-        { name: '产品展示', href: '/products/' },
-        { name: '服务项目', href: '/services/' },
-        { name: '关于我们', href: '/about/' },
-        { name: '联系我们', href: '/contact/' },
+        { name: t('nav.home'), href: '/' },
+        { name: t('nav.products'), href: '/products/' },
+        { name: t('nav.services'), href: '/services/' },
+        { name: t('nav.about'), href: '/about/' },
+        { name: t('nav.contact'), href: '/contact/' },
     ]
 
     return (
@@ -36,7 +39,7 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex space-x-8">
+                    <nav className="hidden md:flex space-x-8 items-center">
                         {navigation.map((item) => {
                             // 简化的路径匹配逻辑
                             const isActive = pathname === item.href ||
@@ -129,8 +132,9 @@ export default function Header() {
 
                     {/* CTA Button */}
                     <div className="hidden md:flex items-center space-x-4">
+                        <LanguageSwitcher />
                         <Link href="/contact" className="btn-primary">
-                            开始合作
+                            {t('hero.startCooperation')}
                         </Link>
                     </div>
 
@@ -229,13 +233,16 @@ export default function Header() {
                                     </Link>
                                 )
                             })}
-                            <Link
-                                href="/contact"
-                                className="btn-primary block text-center mt-4"
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                开始合作
-                            </Link>
+                            <div className="mt-4 space-y-2">
+                                <LanguageSwitcher />
+                                <Link
+                                    href="/contact"
+                                    className="btn-primary block text-center"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {t('hero.startCooperation')}
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 )}

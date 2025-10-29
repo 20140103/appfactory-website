@@ -279,7 +279,7 @@ export default function ProductsGrid({ filters }: ProductsGridProps) {
                                     </Link>
                                     <Link
                                         href={product.githubUrl}
-                                        className="btn-secondary flex items-center justify-center px-4"
+                                        className="btn-secondary text-primary-600 flex items-center justify-center px-4"
                                     >
                                         <Github className="h-4 w-4" />
                                     </Link>

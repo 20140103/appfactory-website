@@ -131,7 +131,7 @@ export default function Services() {
                             <a href="/contact" className="btn-primary">
                                 联系我们
                             </a>
-                            <a href="/services" className="btn-secondary">
+                            <a href="/services" className="btn-secondary text-primary-600">
                                 了解更多
                             </a>
                         </div>

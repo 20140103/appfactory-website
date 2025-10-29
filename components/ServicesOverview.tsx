@@ -209,7 +209,7 @@ export default function ServicesOverview() {
                             <a href="/contact" className="btn-primary bg-white text-primary-600 hover:bg-gray-100">
                                 联系我们
                             </a>
-                            <a href="#process" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600">
+                            <a href="#process" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
                                 了解流程
                             </a>
                         </div>

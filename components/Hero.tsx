@@ -32,7 +32,7 @@ export default function Hero() {
                                 查看我们的作品
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Link>
-                            <Link href="/contact" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600">
+                            <Link href="/contact" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
                                 开始合作
                             </Link>
                         </div>

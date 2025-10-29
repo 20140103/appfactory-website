@@ -79,7 +79,7 @@ export default function Header() {
 
                                             // 强制导航 - 立即尝试手动导航
                                             console.log('🚀 强制导航到:', item.href)
-                                            
+
                                             // 立即尝试多种导航方法
                                             try {
                                                 router.push(item.href)
@@ -87,7 +87,7 @@ export default function Header() {
                                             } catch (error) {
                                                 console.log('❌ router.push 失败:', error)
                                             }
-                                            
+
                                             // 同时尝试 window.location
                                             try {
                                                 window.location.href = item.href
@@ -95,7 +95,7 @@ export default function Header() {
                                             } catch (error) {
                                                 console.log('❌ window.location.href 失败:', error)
                                             }
-                                            
+
                                             // 添加延迟确保导航完成
                                             setTimeout(() => {
                                                 console.log('⏰ 延迟检查导航状态:', {
@@ -103,7 +103,7 @@ export default function Header() {
                                                     targetPath: item.href,
                                                     pathChanged: pathname !== item.href
                                                 })
-                                                
+
                                                 if (pathname === item.href) {
                                                     console.log('⚠️ 导航仍然失败，尝试强制刷新')
                                                     window.location.reload()
@@ -184,7 +184,7 @@ export default function Header() {
                                             } else {
                                                 // 强制导航 - 立即尝试手动导航
                                                 console.log('📱 强制移动端导航到:', item.href)
-                                                
+
                                                 // 立即尝试多种导航方法
                                                 try {
                                                     router.push(item.href)
@@ -192,7 +192,7 @@ export default function Header() {
                                                 } catch (error) {
                                                     console.log('❌ 移动端 router.push 失败:', error)
                                                 }
-                                                
+
                                                 // 同时尝试 window.location
                                                 try {
                                                     window.location.href = item.href
@@ -200,7 +200,7 @@ export default function Header() {
                                                 } catch (error) {
                                                     console.log('❌ 移动端 window.location.href 失败:', error)
                                                 }
-                                                
+
                                                 // 添加延迟确保导航完成
                                                 setTimeout(() => {
                                                     console.log('📱 延迟检查移动端导航状态:', {
@@ -208,7 +208,7 @@ export default function Header() {
                                                         targetPath: item.href,
                                                         pathChanged: pathname !== item.href
                                                     })
-                                                    
+
                                                     if (pathname === item.href) {
                                                         console.log('📱 移动端导航仍然失败，尝试强制刷新')
                                                         window.location.reload()

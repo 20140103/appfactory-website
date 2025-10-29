@@ -107,7 +107,7 @@ export default function ValuesSection() {
                             <a href="/contact" className="btn-primary">
                                 联系我们
                             </a>
-                            <a href="/careers" className="btn-secondary">
+                            <a href="/careers" className="btn-secondary text-primary-600">
                                 查看职位
                             </a>
                         </div>

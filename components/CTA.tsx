@@ -28,7 +28,7 @@ export default function CTA() {
                             立即咨询
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
-                        <Link href="/products" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600">
+                        <Link href="/products" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
                             查看作品
                         </Link>
                     </div>

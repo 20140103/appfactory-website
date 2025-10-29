@@ -195,7 +195,7 @@ export default function PricingSection() {
                             <a href="/contact" className="btn-primary bg-white text-primary-600 hover:bg-gray-100">
                                 获取定制报价
                             </a>
-                            <a href="/products" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600">
+                            <a href="/products" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
                                 查看案例
                             </a>
                         </div>

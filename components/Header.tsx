@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Code2 } from 'lucide-react'
@@ -8,6 +8,13 @@ import { Menu, X, Code2 } from 'lucide-react'
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const pathname = usePathname()
+
+    // 添加路径变化日志
+    useEffect(() => {
+        console.log('🔍 当前路径:', pathname)
+        console.log('🔍 路径类型:', typeof pathname)
+        console.log('🔍 时间戳:', new Date().toISOString())
+    }, [pathname])
 
     const navigation = [
         { name: '首页', href: '/' },
@@ -31,12 +38,30 @@ export default function Header() {
                     <nav className="hidden md:flex space-x-8">
                         {navigation.map((item) => {
                             // 简化的路径匹配逻辑
-                            const isActive = pathname === item.href || 
-                                           (item.href !== '/' && pathname.startsWith(item.href))
+                            const isActive = pathname === item.href ||
+                                (item.href !== '/' && pathname.startsWith(item.href))
+                            
+                            // 添加路径匹配日志
+                            console.log(`🔗 导航项: ${item.name}`, {
+                                href: item.href,
+                                pathname: pathname,
+                                isActive: isActive,
+                                exactMatch: pathname === item.href,
+                                startsWith: item.href !== '/' && pathname.startsWith(item.href)
+                            })
+                            
                             return (
                                 <Link
                                     key={item.name}
                                     href={item.href}
+                                    onClick={() => {
+                                        console.log('🖱️ 导航点击:', {
+                                            item: item.name,
+                                            href: item.href,
+                                            currentPath: pathname,
+                                            timestamp: new Date().toISOString()
+                                        })
+                                    }}
                                     className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${isActive
                                         ? 'text-primary-600'
                                         : 'text-gray-700 hover:text-primary-600'
@@ -75,17 +100,35 @@ export default function Header() {
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
                             {navigation.map((item) => {
                                 // 简化的路径匹配逻辑
-                                const isActive = pathname === item.href || 
-                                               (item.href !== '/' && pathname.startsWith(item.href))
+                                const isActive = pathname === item.href ||
+                                    (item.href !== '/' && pathname.startsWith(item.href))
+                                
+                                // 添加移动端路径匹配日志
+                                console.log(`📱 移动端导航项: ${item.name}`, {
+                                    href: item.href,
+                                    pathname: pathname,
+                                    isActive: isActive,
+                                    exactMatch: pathname === item.href,
+                                    startsWith: item.href !== '/' && pathname.startsWith(item.href)
+                                })
+                                
                                 return (
                                     <Link
                                         key={item.name}
                                         href={item.href}
+                                        onClick={() => {
+                                            console.log('📱 移动端导航点击:', {
+                                                item: item.name,
+                                                href: item.href,
+                                                currentPath: pathname,
+                                                timestamp: new Date().toISOString()
+                                            })
+                                            setIsMenuOpen(false)
+                                        }}
                                         className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${isActive
                                             ? 'text-primary-600 bg-primary-50'
                                             : 'text-gray-700 hover:text-primary-600'
                                             }`}
-                                        onClick={() => setIsMenuOpen(false)}
                                     >
                                         {item.name}
                                     </Link>

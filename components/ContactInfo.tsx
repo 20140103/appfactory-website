@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Clock, MessageCircle, Calendar } from 'lucide-react'
+import { Mail, MapPin, Clock, MessageCircle, Calendar } from 'lucide-react'
 
 export default function ContactInfo() {
     return (
@@ -26,21 +26,8 @@ export default function ContactInfo() {
                     <div>
                         <h3 className="font-semibold text-gray-900 mb-1">邮箱联系</h3>
                         <p className="text-gray-600 mb-2">发送邮件到我们的邮箱</p>
-                        <a href="mailto:contact@appfactory.com" className="text-primary-600 hover:text-primary-700 font-medium">
-                            contact@appfactory.com
-                        </a>
-                    </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                    <div className="bg-primary-100 p-3 rounded-lg">
-                        <Phone className="h-6 w-6 text-primary-600" />
-                    </div>
-                    <div>
-                        <h3 className="font-semibold text-gray-900 mb-1">电话咨询</h3>
-                        <p className="text-gray-600 mb-2">直接拨打我们的电话</p>
-                        <a href="tel:+8613800000000" className="text-primary-600 hover:text-primary-700 font-medium">
-                            +86 138-0000-0000
+                        <a href="mailto:suport@xuzhen.top" className="text-primary-600 hover:text-primary-700 font-medium">
+                            suport@xuzhen.top
                         </a>
                     </div>
                 </div>
@@ -52,8 +39,8 @@ export default function ContactInfo() {
                     <div>
                         <h3 className="font-semibold text-gray-900 mb-1">办公地址</h3>
                         <p className="text-gray-600">
-                            北京市朝阳区科技园区创新大厦<br />
-                            15层 1508室
+                            广东省深圳市南山区<br />
+                            科技园南区
                         </p>
                     </div>
                 </div>
@@ -79,10 +66,6 @@ export default function ContactInfo() {
                     <div className="flex items-center space-x-3">
                         <MessageCircle className="h-5 w-5 text-primary-600" />
                         <span className="text-gray-700">邮件咨询: 24小时内回复</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                        <Phone className="h-5 w-5 text-primary-600" />
-                        <span className="text-gray-700">电话咨询: 工作时间即时响应</span>
                     </div>
                     <div className="flex items-center space-x-3">
                         <Calendar className="h-5 w-5 text-primary-600" />

@@ -179,9 +179,9 @@ export default function FeaturedProducts() {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-center mt-12"
                 >
-                    <Link href="/products" className="btn-primary">
+                    <Link href="/products" className="btn-primary gap-2">
                         查看所有项目
-                        <ExternalLink className="ml-2 h-5 w-5" />
+                        <ExternalLink className="h-5 w-5 shrink-0" />
                     </Link>
                 </motion.div>
             </div>

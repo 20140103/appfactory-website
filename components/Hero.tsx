@@ -35,7 +35,7 @@ export default function Hero() {
                                 {t('hero.viewWorks')}
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Link>
-                            <Link href="/contact" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
+                            <Link href="/contact" className="btn-outline-light">
                                 {t('hero.startCooperation')}
                             </Link>
                         </div>

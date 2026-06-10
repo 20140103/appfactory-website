@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react'
 import { Locale, getMessages } from '@/lib/i18n'
 
 interface LanguageContextType {
@@ -14,8 +14,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocale] = useState<Locale>('zh')
+  const isInitialMount = useRef(true)
 
-  // Load saved language from localStorage on mount
   useEffect(() => {
     const savedLocale = localStorage.getItem('language') as Locale
     if (savedLocale && ['zh', 'en'].includes(savedLocale)) {
@@ -23,8 +23,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Save language to localStorage when it changes
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
     localStorage.setItem('language', locale)
   }, [locale])
 

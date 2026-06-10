@@ -2,20 +2,25 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, CheckCircle } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+
+const CONTACT_API_URL = process.env.NEXT_PUBLIC_CONTACT_API_URL || '/api/contact'
+
+const initialFormData = {
+    name: '',
+    email: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    message: '',
+    website: '',
+}
 
 export default function ContactForm() {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        projectType: '',
-        budget: '',
-        message: ''
-    })
+    const [formData, setFormData] = useState(initialFormData)
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [error, setError] = useState('')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
@@ -27,12 +32,33 @@ export default function ContactForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
+        setError('')
 
-        // 模拟提交
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        try {
+            const response = await fetch(CONTACT_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
 
-        setIsSubmitting(false)
-        setIsSubmitted(true)
+            const result = await response.json() as { success?: boolean; message?: string }
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || '消息发送失败，请稍后重试')
+            }
+
+            setIsSubmitted(true)
+        } catch (submitError) {
+            setError(
+                submitError instanceof Error
+                    ? submitError.message
+                    : '消息发送失败，请稍后重试或直接发送邮件至 suport@xuzhen.top'
+            )
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     if (isSubmitted) {
@@ -50,15 +76,8 @@ export default function ContactForm() {
                 <button
                     onClick={() => {
                         setIsSubmitted(false)
-                        setFormData({
-                            name: '',
-                            email: '',
-                            company: '',
-                            phone: '',
-                            projectType: '',
-                            budget: '',
-                            message: ''
-                        })
+                        setFormData(initialFormData)
+                        setError('')
                     }}
                     className="btn-primary"
                 >
@@ -77,7 +96,25 @@ export default function ContactForm() {
         >
             <h2 className="text-2xl font-bold text-gray-900 mb-6">发送消息</h2>
 
+            {error && (
+                <div className="mb-6 flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
+                    <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+                    <p>{error}</p>
+                </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
+                <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    aria-hidden="true"
+                />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -112,36 +149,19 @@ export default function ContactForm() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                            公司名称
-                        </label>
-                        <input
-                            type="text"
-                            id="company"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            placeholder="请输入公司名称"
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                            联系电话
-                        </label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                            placeholder="请输入联系电话"
-                        />
-                    </div>
+                <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                        公司名称
+                    </label>
+                    <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        placeholder="请输入公司名称"
+                    />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

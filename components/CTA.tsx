@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone } from 'lucide-react'
+import { ArrowRight, Mail } from 'lucide-react'
 
 export default function CTA() {
     return (
@@ -28,46 +28,27 @@ export default function CTA() {
                             立即咨询
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
-                        <Link href="/products" className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600 transition-all duration-200">
+                        <Link href="/products" className="btn-outline-light">
                             查看作品
                         </Link>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6, delay: 0.2 }}
-                            viewport={{ once: true }}
-                            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
-                        >
-                            <div className="flex items-center mb-4">
-                                <Mail className="h-6 w-6 text-yellow-300 mr-3" />
-                                <h3 className="text-lg font-semibold">邮件联系</h3>
-                            </div>
-                            <p className="text-blue-100 mb-2">发送邮件到我们的邮箱</p>
-                            <a href="mailto:contact@appfactory.com" className="text-yellow-300 hover:text-yellow-200 transition-colors">
-                                contact@appfactory.com
-                            </a>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6, delay: 0.4 }}
-                            viewport={{ once: true }}
-                            className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
-                        >
-                            <div className="flex items-center mb-4">
-                                <Phone className="h-6 w-6 text-yellow-300 mr-3" />
-                                <h3 className="text-lg font-semibold">电话咨询</h3>
-                            </div>
-                            <p className="text-blue-100 mb-2">直接拨打我们的电话</p>
-                            <a href="tel:+8613800000000" className="text-yellow-300 hover:text-yellow-200 transition-colors">
-                                +86 138-0000-0000
-                            </a>
-                        </motion.div>
-                    </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 max-w-md mx-auto"
+                    >
+                        <div className="flex items-center mb-4">
+                            <Mail className="h-6 w-6 text-yellow-300 mr-3" />
+                            <h3 className="text-lg font-semibold">邮件联系</h3>
+                        </div>
+                        <p className="text-blue-100 mb-2">发送邮件到我们的邮箱</p>
+                        <a href="mailto:suport@xuzhen.top" className="text-yellow-300 hover:text-yellow-200 transition-colors">
+                            suport@xuzhen.top
+                        </a>
+                    </motion.div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

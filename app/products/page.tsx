@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import ProductsGrid from '@/components/ProductsGrid'
 import ProductsFilter from '@/components/ProductsFilter'
 
@@ -10,9 +10,9 @@ export default function ProductsPage() {
         technologies: [] as string[]
     })
 
-    const handleFilterChange = (newFilters: { category: string; technologies: string[] }) => {
+    const handleFilterChange = useCallback((newFilters: { category: string; technologies: string[] }) => {
         setFilters(newFilters)
-    }
+    }, [])
 
     return (
         <div className="min-h-screen bg-gray-50">

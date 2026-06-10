@@ -16,11 +16,15 @@
 
 @layer components {
     .btn-primary {
-        @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200;
+        @apply inline-flex items-center justify-center bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 whitespace-nowrap;
     }
 
     .btn-secondary {
         @apply bg-white hover:bg-gray-50 text-primary-600 font-medium py-3 px-6 rounded-lg border border-primary-600 transition-colors duration-200;
+    }
+
+    .btn-outline-light {
+        @apply inline-flex items-center justify-center bg-transparent hover:bg-white text-white hover:text-primary-600 font-medium py-3 px-6 rounded-lg border-2 border-white transition-colors duration-200 whitespace-nowrap;
     }
 
     .card {

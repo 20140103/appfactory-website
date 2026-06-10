@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { Menu, X, Code2 } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -10,15 +10,7 @@ import LanguageSwitcher from './LanguageSwitcher'
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const pathname = usePathname()
-    const router = useRouter()
     const { t } = useLanguage()
-
-    // 添加路径变化日志
-    useEffect(() => {
-        console.log('🔍 当前路径:', pathname)
-        console.log('🔍 路径类型:', typeof pathname)
-        console.log('🔍 时间戳:', new Date().toISOString())
-    }, [pathname])
 
     const navigation = [
         { name: t('nav.home'), href: '/' },
@@ -41,81 +33,13 @@ export default function Header() {
                     {/* Desktop Navigation */}
                     <nav className="hidden md:flex space-x-8 items-center">
                         {navigation.map((item) => {
-                            // 简化的路径匹配逻辑
                             const isActive = pathname === item.href ||
                                 (item.href !== '/' && pathname.startsWith(item.href))
 
-                            // 添加路径匹配日志
-                            console.log(`🔗 导航项: ${item.name}`, {
-                                href: item.href,
-                                pathname: pathname,
-                                isActive: isActive,
-                                exactMatch: pathname === item.href,
-                                startsWith: item.href !== '/' && pathname.startsWith(item.href)
-                            })
-
                             return (
                                 <Link
-                                    key={item.name}
+                                    key={item.href}
                                     href={item.href}
-                                    onClick={(e) => {
-                                        console.log('🖱️ 导航点击:', {
-                                            item: item.name,
-                                            href: item.href,
-                                            currentPath: pathname,
-                                            timestamp: new Date().toISOString(),
-                                            event: e,
-                                            defaultPrevented: e.defaultPrevented,
-                                            isPropagationStopped: e.isPropagationStopped()
-                                        })
-
-                                        // 确保导航正常工作
-                                        console.log('🖱️ 导航目标:', item.href)
-
-                                        // 如果当前路径和目标路径相同，强制刷新
-                                        if (pathname === item.href) {
-                                            console.log('🔄 强制刷新页面')
-                                            window.location.reload()
-                                        } else {
-                                            // 检查是否有其他代码阻止了导航
-                                            console.log('🔍 检查导航状态...')
-
-                                            // 强制导航 - 立即尝试手动导航
-                                            console.log('🚀 强制导航到:', item.href)
-
-                                            // 立即尝试多种导航方法
-                                            try {
-                                                router.push(item.href)
-                                                console.log('📱 router.push 已调用')
-                                            } catch (error) {
-                                                console.log('❌ router.push 失败:', error)
-                                            }
-
-                                            // 同时尝试 window.location
-                                            try {
-                                                window.location.href = item.href
-                                                console.log('🌐 window.location.href 已调用')
-                                            } catch (error) {
-                                                console.log('❌ window.location.href 失败:', error)
-                                            }
-
-                                            // 添加延迟确保导航完成
-                                            setTimeout(() => {
-                                                console.log('⏰ 延迟检查导航状态:', {
-                                                    currentPath: pathname,
-                                                    targetPath: item.href,
-                                                    pathChanged: pathname !== item.href
-                                                })
-
-                                                if (pathname === item.href) {
-                                                    console.log('⚠️ 导航仍然失败，尝试强制刷新')
-                                                    window.location.reload()
-                                                } else {
-                                                    console.log('✅ 导航成功完成')
-                                                }
-                                            }, 50)
-                                        }
-                                    }}
                                     className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${isActive
                                         ? 'text-primary-600'
                                         : 'text-gray-700 hover:text-primary-600'
@@ -154,76 +78,14 @@ export default function Header() {
                     <div className="md:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
                             {navigation.map((item) => {
-                                // 简化的路径匹配逻辑
                                 const isActive = pathname === item.href ||
                                     (item.href !== '/' && pathname.startsWith(item.href))
 
-                                // 添加移动端路径匹配日志
-                                console.log(`📱 移动端导航项: ${item.name}`, {
-                                    href: item.href,
-                                    pathname: pathname,
-                                    isActive: isActive,
-                                    exactMatch: pathname === item.href,
-                                    startsWith: item.href !== '/' && pathname.startsWith(item.href)
-                                })
-
                                 return (
                                     <Link
-                                        key={item.name}
+                                        key={item.href}
                                         href={item.href}
-                                        onClick={(e) => {
-                                            console.log('📱 移动端导航点击:', {
-                                                item: item.name,
-                                                href: item.href,
-                                                currentPath: pathname,
-                                                timestamp: new Date().toISOString()
-                                            })
-                                            // 确保导航正常工作
-                                            console.log('📱 移动端导航目标:', item.href)
-
-                                            // 如果当前路径和目标路径相同，强制刷新
-                                            if (pathname === item.href) {
-                                                console.log('🔄 移动端强制刷新页面')
-                                                window.location.reload()
-                                            } else {
-                                                // 强制导航 - 立即尝试手动导航
-                                                console.log('📱 强制移动端导航到:', item.href)
-
-                                                // 立即尝试多种导航方法
-                                                try {
-                                                    router.push(item.href)
-                                                    console.log('📱 移动端 router.push 已调用')
-                                                } catch (error) {
-                                                    console.log('❌ 移动端 router.push 失败:', error)
-                                                }
-
-                                                // 同时尝试 window.location
-                                                try {
-                                                    window.location.href = item.href
-                                                    console.log('🌐 移动端 window.location.href 已调用')
-                                                } catch (error) {
-                                                    console.log('❌ 移动端 window.location.href 失败:', error)
-                                                }
-
-                                                // 添加延迟确保导航完成
-                                                setTimeout(() => {
-                                                    console.log('📱 延迟检查移动端导航状态:', {
-                                                        currentPath: pathname,
-                                                        targetPath: item.href,
-                                                        pathChanged: pathname !== item.href
-                                                    })
-
-                                                    if (pathname === item.href) {
-                                                        console.log('📱 移动端导航仍然失败，尝试强制刷新')
-                                                        window.location.reload()
-                                                    } else {
-                                                        console.log('📱 移动端导航成功完成')
-                                                    }
-                                                }, 50)
-                                            }
-
-                                            setIsMenuOpen(false)
-                                        }}
+                                        onClick={() => setIsMenuOpen(false)}
                                         className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${isActive
                                             ? 'text-primary-600 bg-primary-50'
                                             : 'text-gray-700 hover:text-primary-600'

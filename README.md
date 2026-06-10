@@ -154,19 +154,79 @@ npm start
 
 ## 🚀 部署
 
-### Vercel 部署
+本项目已配置为静态导出（`output: 'export'`），构建产物位于 `./out` 目录，可部署到 Cloudflare Pages。
+
+### Cloudflare Pages 部署
+
+#### 方式一：Git 自动部署（推荐）
 
 1. 将代码推送到 GitHub
-2. 在 Vercel 中导入项目
-3. 自动部署完成
+2. 访问 [Cloudflare Pages](https://pages.cloudflare.com/) 并创建新项目
+3. 连接 Git 仓库，配置构建设置：
+   - **构建命令**: `yarn build`
+   - **构建输出目录**: `out`
+4. 保存后每次推送代码将自动部署
+
+#### 方式二：Wrangler CLI 部署
+
+```bash
+# 安装依赖并构建
+yarn install
+yarn build
+
+# 部署到 Cloudflare Pages
+npx wrangler pages deploy ./out
+```
+
+#### 方式三：使用部署脚本
+
+```bash
+./deploy.sh
+```
+
+脚本会完成依赖安装和构建，并提示后续部署步骤。
+
+#### 自定义域名
+
+在 Cloudflare Pages 项目设置中添加自定义域名即可，DNS 由 Cloudflare 自动配置。
+
+### 联系表单配置
+
+联系表单通过 Cloudflare Pages Function（`functions/api/contact.ts`）发送邮件。
+
+#### 方式一：Resend（推荐）
+
+1. 在 [Resend](https://resend.com/) 注册并创建 API Key
+2. 在 Resend 中验证发信域名（如 `xuzhen.top`）
+3. 在 Cloudflare Pages 项目 **Settings → Environment variables** 中添加：
+   - `RESEND_API_KEY`：Resend API Key（Secret）
+   - `CONTACT_TO_EMAIL`：`suport@xuzhen.top`（可选，已有默认值）
+   - `CONTACT_FROM_EMAIL`：`noreply@xuzhen.top`（可选，需为已验证域名）
+
+#### 方式二：Mailchannels（无需第三方账号）
+
+若不配置 `RESEND_API_KEY`，将自动使用 Mailchannels 发信。需在 Cloudflare DNS 为 `xuzhen.top` 添加 TXT 记录：
+
+- **名称**: `_mailchannels`
+- **内容**: `v=mc1 cfid=<你的 Cloudflare Account ID>`
+
+Account ID 可在 Cloudflare Dashboard 右侧栏找到。
+
+#### 本地测试
+
+```bash
+yarn build
+cp .dev.vars.example .dev.vars   # 填入 RESEND_API_KEY
+npx wrangler pages dev ./out
+```
+
+访问本地地址后，在联系页面提交表单即可测试。
+
+> 注意：使用 `npm run dev` 启动时无法调用 `/api/contact`，请使用 `wrangler pages dev` 测试发信功能。
 
 ### 其他平台
 
-网站可以部署到任何支持 Next.js 的平台，如：
-- Netlify
-- AWS
-- 阿里云
-- 腾讯云
+静态站点也可部署到其他平台，如 Netlify、AWS S3、阿里云 OSS、腾讯云 COS 等。
 
 ## 📄 许可证
 
@@ -178,6 +238,5 @@ MIT License
 
 ## 📞 联系我们
 
-- 邮箱: contact@appfactory.com
-- 电话: +86 138-0000-0000
-- 地址: 北京市朝阳区科技园区创新大厦
+- 邮箱: suport@xuzhen.top
+- 地址: 广东省深圳市南山区科技园南区

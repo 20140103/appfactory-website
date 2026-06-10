@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Code2, Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react'
+import { Code2, Mail, MapPin, Github, Linkedin, Twitter } from 'lucide-react'
 
 export default function Footer() {
     return (
@@ -67,15 +67,13 @@ export default function Footer() {
                         <div className="space-y-3">
                             <div className="flex items-center space-x-3">
                                 <Mail className="h-5 w-5 text-primary-400" />
-                                <span className="text-gray-300">contact@appfactory.com</span>
-                            </div>
-                            <div className="flex items-center space-x-3">
-                                <Phone className="h-5 w-5 text-primary-400" />
-                                <span className="text-gray-300">+86 138-0000-0000</span>
+                                <a href="mailto:suport@xuzhen.top" className="text-gray-300 hover:text-primary-400 transition-colors">
+                                    suport@xuzhen.top
+                                </a>
                             </div>
                             <div className="flex items-start space-x-3">
                                 <MapPin className="h-5 w-5 text-primary-400 mt-1" />
-                                <span className="text-gray-300">北京市朝阳区<br />科技园区创新大厦</span>
+                                <span className="text-gray-300">广东省深圳市南山区<br />科技园南区</span>
                             </div>
                         </div>
                     </div>

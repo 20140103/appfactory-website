@@ -1,0 +1,4 @@
+# 复制为 .dev.vars 后填入真实值，用于 wrangler pages dev 本地测试
+RESEND_API_KEY=
+CONTACT_TO_EMAIL=suport@xuzhen.top
+CONTACT_FROM_EMAIL=noreply@xuzhen.top

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://appfactory.xuzhen.top/sitemap.xml
+
+

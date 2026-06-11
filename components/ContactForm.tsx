@@ -5,10 +5,12 @@ import { motion } from 'framer-motion'
 import { Send, CheckCircle, AlertCircle } from 'lucide-react'
 
 const CONTACT_API_URL = process.env.NEXT_PUBLIC_CONTACT_API_URL || '/api/contact'
+const CONTACT_EMAIL = 'suport@xuzhen.top'
 
 const initialFormData = {
     name: '',
     email: '',
+    phone: '',
     company: '',
     projectType: '',
     budget: '',
@@ -54,7 +56,7 @@ export default function ContactForm() {
             setError(
                 submitError instanceof Error
                     ? submitError.message
-                    : '消息发送失败，请稍后重试或直接发送邮件至 suport@xuzhen.top'
+                    : `消息发送失败，请稍后重试或直接发送邮件至 ${CONTACT_EMAIL}`
             )
         } finally {
             setIsSubmitting(false)
@@ -149,19 +151,37 @@ export default function ContactForm() {
                     </div>
                 </div>
 
-                <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                        公司名称
-                    </label>
-                    <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                        placeholder="请输入公司名称"
-                    />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                            手机号
+                        </label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            placeholder="选填，便于我们与您联系"
+                            autoComplete="tel"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                            公司名称
+                        </label>
+                        <input
+                            type="text"
+                            id="company"
+                            name="company"
+                            value={formData.company}
+                            onChange={handleChange}
+                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                            placeholder="请输入公司名称"
+                        />
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

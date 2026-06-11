@@ -4,9 +4,8 @@ compatibility_date = "2024-01-01"
 # Cloudflare Pages 配置
 pages_build_output_dir = "out"
 
-[vars]
-CONTACT_TO_EMAIL = "suport@xuzhen.top"
-CONTACT_FROM_EMAIL = "noreply@xuzhen.top"
-
-[env.production]
-name = "appfactory-website"
+[[d1_databases]]
+binding = "DB"
+database_name = "appfactory-contacts"
+database_id = "397d6447-0aa6-4be6-ae34-6e12a464e7bb"
+migrations_dir = "migrations"

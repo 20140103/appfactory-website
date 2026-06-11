@@ -6,7 +6,12 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "deploy": "bash deploy.sh",
+        "deploy:cf": "bash deploy.sh",
+        "preview:cf": "bash preview-cf.sh",
+        "db:migrate": "wrangler d1 migrations apply appfactory-contacts --remote",
+        "db:list": "wrangler d1 execute appfactory-contacts --remote --command \"SELECT id, name, email, phone, company, project_type, budget, created_at FROM contacts ORDER BY created_at DESC LIMIT 20\""
     },
     "dependencies": {
         "next": "14.0.4",
@@ -26,7 +31,8 @@
         "postcss": "^8",
         "tailwindcss": "^3.3.0",
         "eslint": "^8",
-        "eslint-config-next": "14.0.4"
+        "eslint-config-next": "14.0.4",
+        "wrangler": "^3.100.0"
     },
     "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
